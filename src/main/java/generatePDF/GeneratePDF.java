@@ -1,6 +1,7 @@
 package generatePDF;
 
 import org.apache.fop.apps.*;
+import org.xml.sax.SAXException;
 
 import javax.xml.transform.*;
 import javax.xml.transform.sax.SAXResult;
@@ -79,23 +80,24 @@ public class GeneratePDF {
 	 * Method that will convert the given XML to PDF
 	 * 
 	 * @throws IOException
-	 * @throws FOPException
 	 * @throws TransformerException
+	 * @throws SAXException 
 	 */
-	public void convertToPDF() throws IOException, FOPException, TransformerException {
+	public void convertToPDF() throws IOException, TransformerException, SAXException {
 		// the XSL FO file
 		//File xsltFile = new File(RESOURCES_DIR + "//xhtml-to-xslfo.xsl");
-		File xsltFile = new File(RESOURCES_DIR + "//readme.xsl");
+		FopFactory fopFactory = FopFactory.newInstance(new File(RESOURCES_DIR + "//fop.xconf"));
+		File xsltFile = new File(RESOURCES_DIR + "//sample.xsl");
 		// the XML file which provides the input
 		//StreamSource xmlSource = new StreamSource(new File(RESOURCES_DIR + "//Employees.xml"));
-		StreamSource xmlSource = new StreamSource(new File(RESOURCES_DIR + "//name.xml"));
+		StreamSource xmlSource = new StreamSource(new File(RESOURCES_DIR + "//sample.xml"));
 		// create an instance of fop factory
-		FopFactory fopFactory = FopFactory.newInstance(new File(".").toURI());
+		//FopFactory fopFactory = FopFactory.newInstance(new File(".").toURI());
 		// a user agent is needed for transformation
 		FOUserAgent foUserAgent = fopFactory.newFOUserAgent();
 		// Setup output
 		OutputStream out;
-		out = new java.io.FileOutputStream(OUTPUT_DIR + "//readme.pdf");
+		out = new java.io.FileOutputStream(OUTPUT_DIR + "//sample.pdf");
 
 		try {
 			// Construct fop with desired output format

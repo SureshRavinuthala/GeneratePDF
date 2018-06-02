@@ -454,7 +454,7 @@ the location of this file.
     </renderer>
 
     <renderer mime="text/xml">
-	<name>Frank</name>
+	
     </renderer>
 
     <!-- RTF does not have a renderer
